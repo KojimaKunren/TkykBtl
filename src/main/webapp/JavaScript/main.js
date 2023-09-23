@@ -1,15 +1,22 @@
-function battle(player, enemy, select) {
-		innerText=`Buttle Start`;
-		innerText=`enemy.getName()が現れた! \n`;
+const maintext = document.getElementById("maintext");
+let status = document.getElementById("status");
+const container = document.getElementById("container");
+const context = document.getElementById("context");
+const atkexecute = document.getElementById("atkexecute");
+const recoveryexecute = document.getElementById("recoveryexecute");
+
+function battle(status) {
+		maintext.innerText=`Buttle Start`;
+		maintext.innerText=`enemy.getName()が現れた!`;
 		let isEnd = false;
 
 		do {
-			innerText=`行動を選択してください`;
+			maintext.innerText=`行動を選択してください`;
 			switch (select) {
 			case 1:
 				player.attack(player, enemy);
 				if (enemy.isDead(enemy)) {
-					innerText=`%sに勝利した \n", enemy.getName()`;
+					maintext.innerText=`%sに勝利した \n", enemy.getName()`;
 					isEnd = true;
 					break;
 				}
@@ -27,3 +34,9 @@ function battle(player, enemy, select) {
 			}
 		} while (isEnd != true);
 	}
+
+function init(){
+	let player = new Player(playerName,playerHp,playerMaxHp,playerMp,playerMaxMp,playerAtk,playerDef)
+	}
+
+	

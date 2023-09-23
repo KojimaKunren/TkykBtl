@@ -2,17 +2,34 @@
 
 #container{
 	width: 100%;
+
 }
 
 #contents{
 	display: flex;
 	justify-content: left;
+	font-style: oblique;
+	font-weight: 500;
+}
+
+#maintext{
+	background-color: white;
+	margin: 20px;
+	top: 60%;
+	left: 10%;
+	right: 10%;
+	bottom:20%;
+	padding: 20px;
+	width: 70%;
+	height: 100px;
+	position: absolute;
 }
 
 
 left{
 	width: 70%;
 	float: left;
+	position: relative;
 }
 
 right{
@@ -37,7 +54,7 @@ right-lower{
 }
 
 button{
-	background-color: black;
+	background-color: yellow;
 	border-radius: 1.0px;
 	cursor: pointer;
 }

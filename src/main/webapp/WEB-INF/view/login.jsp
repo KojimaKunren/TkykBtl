@@ -15,14 +15,16 @@
 		<h1>TKYKBTL</h1>
 	</div>
 	<div>
-		<form action="main.jsp" method="POST">
+		<h1>Login</h1>
+		<form action="Login" method="POST">
 			UserName:<br>
 			<input type="text" name="name" required><br> 
 			Password:<br>
 			<input type="password" name="pass" required><br><br>
 			<button type=submit>ログイン</button>
 		</form>
-			<a href="userRegister.jsp">ユーザー登録</a>
+			<p>ユーザー未登録の方</p>
+			<a href="Register">ユーザー登録</a>
 	</div>
 </body>
 </html>

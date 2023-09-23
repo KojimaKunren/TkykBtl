@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="css/log.css">
 <title>LoginResult</title>
 </head>
-<body onLoad=setTimeout("location.href='WEB-INF/view/main.jsp'",3000)>
+<body onLoad=setTimeout("location.href='Main'",3000)>
 <div>
 <h1>Login Sucseed</h1>
 </div>

@@ -19,8 +19,9 @@ public class UserdataDAO extends DAO{
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
+				String pass = rs.getString("passward");
 				String pict = rs.getString("image");
-				User user = new User(id, name, pict);
+				User user = new User(id, name, pass, pict);
 				list.add(user);
 			}
 		}catch(NamingException | SQLException e) {

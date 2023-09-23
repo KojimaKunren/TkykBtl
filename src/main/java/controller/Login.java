@@ -24,7 +24,7 @@ import model.User;
 @MultipartConfig
 public class Login extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/loginResult.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/login.jsp");
 		rd.forward(request, response);
 	}
 	
@@ -52,12 +52,15 @@ public class Login extends HttpServlet{
 			}
 		}
 		
+		User user = new User(id,name,pass);
+		
 		SavedataDAO savedataDao = new SavedataDAO();
 		Status status = savedataDao.findOne(id);
 		Player player = new Player(id, name, status);
 		
 		//セッションスコープ
 		HttpSession session = request.getSession();
+		session.setAttribute("loginUser", user);
 		session.setAttribute("player", player);
 		
 		//敵の生成

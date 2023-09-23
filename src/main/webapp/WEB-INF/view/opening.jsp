@@ -25,7 +25,7 @@ integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="ano
 	<script>
 	const btn = document.getElementById("btn");
 	btn.addEventListener("click",()=>{
-			location.href= "login.jsp";
+			location.href= "WEB-INF/view/login.jsp";
 		});
 </script>
 </body>

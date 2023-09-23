@@ -67,7 +67,7 @@ public class Login extends HttpServlet{
 		session.setAttribute("enemy", enemy);
 		
 		//送信
-		RequestDispatcher rd = request.getRequestDispatcher("/loginResult.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/loginResult.jsp");
 		rd.forward(request, response);
 	}
 }

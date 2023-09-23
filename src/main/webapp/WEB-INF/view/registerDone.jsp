@@ -22,7 +22,7 @@
 <script>
 $('#move').load(function(){
 	setTimeout(function(){
-	window.location.href='/main.jsp';
+	window.location.href='/WEB-INF/view/main.jsp';
 		}, 1000);
 });
 </script>

@@ -27,7 +27,7 @@ public class Status {
 		this.hp = hp;
 	}
 	
-	public Hp getMaxHp() {
+	public MaxHp getMaxHp() {
 		return this.MAXHP;
 	}
 	
@@ -42,6 +42,7 @@ public class Status {
 	public Mp getMaxMp() {
 		return this.MAXMP;
 	}
+	
 	
 	public AttackPower getAtk() {
 		return this.atk;

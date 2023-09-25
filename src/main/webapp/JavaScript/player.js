@@ -1,4 +1,6 @@
 
+const maintext = document.getElementById("maintext");
+
 class Player {
 	constructor(name, status) {
 		this.name = name;
@@ -12,34 +14,33 @@ class Player {
 	get getStatus() {
 		return this.status;
 	}
-}
-function useRecovery(player, recovery) {
-	if (playerMp > recovery.getRecoveryCost()) {
-			Hp recoveredHp = new Hp(player.status.hp.getHp() + recovery.getRecovery());
-		player.status.setHp(recoveredHp);
-			Mp recoveredMp = new Mp(player.status.mp.getMp() - recovery.getRecoveryCost());
-		player.status.setMp(recoveredMp);
+
+	 useRecovery(player) {
+	if (player.status.hp> playerRecoveryCost()) {
+			const recoveredHp = player.status.hp + player.status.recovery.recovery;
+		player.status.hp = recoveredHp;
+			const recoveredMp = player.status.mp - player.status.recovery.recoveryCost;
+		player.status.mp =recoveredMp;
 	}
 }
 
-function attack(player, enemy) {
-	const amount = (Integer)player.status.getAtk().atk - (Integer)enemy.status.getDef().def;
+	 attack(player, enemy) {
+	const amount = player.status.atk - enemy.status.def;
 	if (amount > 0) {
-		const dmg = (Integer)enemy.status.getHp().hp - amount;
+		const dmg = enemy.status.def - amount;
 		const actualDmg = Math.max(dmg, 0);
-			Hp damagedHp = new Hp(actualDmg);
-		enemy.status.setHp(damagedHp);
-		System.out.printf("%sの攻撃！！%sに%dのダメージを与えた \n", player.getName(), enemy.getName(), dmg);
+		enemy.status.hp = actualDmg; 
+		maintext.innerText=`${playerName}の攻撃！！${enemyName}に${dmg}のダメージを与えた`;
 		enemy.isDead(enemy);
 	} else {
-		System.out.printf("%sの攻撃！！ダメージを与えられなかった\n", player.getName());
+		maintext.innerText=`${playerName}の攻撃！！ダメージを与えられなかった`;
 	}
-	System.out.printf("%sのHP: %d \n", enemy.getName(), (Integer)enemy.status.hp.hp);
+	maintext.innerText=`${enemyName}のHP: ${enemy.status.hp}`;
 }
 
-function isDead(player) {
+	isDead(player) {
 	let isCheck = false;
-	if ((Integer)player.status.hp.hp <= 0) {
+	if (player.status.hp <= 0) {
 		isCheck = true;
 	}
 	return isCheck;

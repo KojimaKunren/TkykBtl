@@ -133,9 +133,9 @@ Recovery recovery = (Recovery) session.getAttribute("recovery");
 			</div>
 			</right-upper> <right-lower>
 			<div>
-				<button id="atkexecute" onclick="textchange()">たたかう</button>
+				<button id="btn">Attack</button>
 				<br>
-				<button id="recoveryexecute" onclick="textchange">かいふく</button>
+				<button id="btn">Recovery</button>
 			</div>
 			</right-lower> </right>
 		</div>

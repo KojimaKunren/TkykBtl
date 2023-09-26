@@ -39,8 +39,9 @@ public class UserdataDAO extends DAO{
 			stmt = con.prepareStatement("SELECT * FROM userdata WHERE id=?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
-			rs.next();
+			if(rs.next()) {
 			user = new User(rs.getInt("id"), rs.getString("name"), rs.getString("image"));
+			}
 		}catch(NamingException | SQLException e) {
 			System.out.println("Connection failed");
 		}finally {
@@ -56,10 +57,9 @@ public class UserdataDAO extends DAO{
 			stmt = con.prepareStatement("SELECT * FROM userdata WHERE name=?");
 			stmt.setString(1, name);
 			rs = stmt.executeQuery();
-			rs.next();
-//			int i = rs.getInt("id");
-//			System.out.println(i);
+			if(rs.next()) {
 			user = new User(rs.getInt("id"), rs.getString("name"), rs.getString("image"));
+			}
 		}catch(NamingException | SQLException e) {
 			e.printStackTrace();
 			System.out.println("Connection failed");

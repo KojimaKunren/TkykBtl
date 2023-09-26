@@ -56,7 +56,29 @@ public class EnemydataDAO extends DAO{
 			rs = stmt.executeQuery();
 			if(rs.next()) {
 				String name = rs.getString("name");
-				Recovery recovery = new Recovery(rs.getString("name"), rs.getInt("recovery"), rs.getInt("recoverycost"));
+				Recovery recovery = new Recovery(rs.getString("recoveryname"), rs.getInt("recovery"), rs.getInt("recoverycost"));
+				Status enemyStatus = new Status(new Hp(rs.getInt("hp")), new MaxHp(rs.getInt("maxhp")), new Mp(rs.getInt("mp")), new MaxMp(rs.getInt("maxmp")),
+						new AttackPower(rs.getInt("atk")), new DeffencePower(rs.getInt("def")), recovery);
+				enemy = new Enemy(name, id, enemyStatus);
+			}
+		}catch(NamingException | SQLException e) {
+			System.out.println("Connection failed");
+		}finally {
+			this.disconnect();
+		}
+		return	enemy;
+	}
+	
+	public Enemy findOne(String name) {
+		Enemy enemy = null;
+		try {
+			this.connect();
+			stmt = con.prepareStatement("SELECT * FROM enemydata WHERE name=?");
+			stmt.setString(1, name);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				int id = rs.getInt("id");
+				Recovery recovery = new Recovery(rs.getString("recoveryname"), rs.getInt("recovery"), rs.getInt("recoverycost"));
 				Status enemyStatus = new Status(new Hp(rs.getInt("hp")), new MaxHp(rs.getInt("maxhp")), new Mp(rs.getInt("mp")), new MaxMp(rs.getInt("maxmp")),
 						new AttackPower(rs.getInt("atk")), new DeffencePower(rs.getInt("def")), recovery);
 				enemy = new Enemy(name, id, enemyStatus);

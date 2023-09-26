@@ -14,12 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import dao.EnemydataDAO;
 import dao.SavedataDAO;
 import dao.UserdataDAO;
 import model.AttackPower;
 import model.DeffencePower;
-import model.Enemy;
 import model.Hp;
 import model.MaxHp;
 import model.MaxMp;
@@ -97,12 +95,14 @@ public class Register extends HttpServlet {
 		Player player = new Player(playerId, name, status);
 		savedataDao.insertOne(player);
 		session.setAttribute("player", player);
+		session.setAttribute("status", status);
+		session.setAttribute("recovery", recovery);
 		
 		//敵の生成
-		Enemy enemy = new Enemy();
-		EnemydataDAO enemydataDao = new EnemydataDAO();
-		enemy = enemydataDao.findOne(1);
-		session.setAttribute("enemy", enemy);
+//		Enemy enemy = new Enemy();
+//		EnemydataDAO enemydataDao = new EnemydataDAO();
+//		enemy = enemydataDao.findOne(1);
+//		session.setAttribute("enemy", enemy);
 		
 		//送信
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/loginResult.jsp");

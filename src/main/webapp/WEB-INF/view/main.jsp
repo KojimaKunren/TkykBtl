@@ -2,8 +2,20 @@
 	pageEncoding="UTF-8"%>
 <%@ page
 	import="model.Player, model.Enemy, model.Status, model.Recovery, model.Hp, model.MaxHp,model.Mp,model.MaxMp, model.AttackPower,model.DeffencePower"%>
-<% Player player = (Player)session.getAttribute("player"); %>
-<% Enemy enemy = (Enemy)session.getAttribute("enemy"); %>
+<%
+Player player = (Player) session.getAttribute("player");
+%>
+<%
+Recovery enemyRecovery = new Recovery(" ",10,10);
+Status enemyStatus = new Status(new Hp(10),new MaxHp(10), new Mp(0), new MaxMp(0), new AttackPower(10), new DeffencePower(10), enemyRecovery);
+Enemy enemy = new Enemy("ENEMY1",1,enemyStatus);
+%>
+<%
+Status status = (Status) session.getAttribute("status");
+%>
+<%
+Recovery recovery = (Recovery) session.getAttribute("recovery");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,111 +29,122 @@
 <%=player.getName()%>
 	;
 	let playerHp =
-<%=player.getStatus().getHp().getHp() %>
+<%=player.getStatus().getHp().getHp()%>
 	;
 	let playerMaxHp =
-${player.status.maxhp.maxhp}
+<%=player.getStatus().getMaxHp().getHp()%>
 	;
 	let playerMp =
-${player.status.mp.mp}
+<%=player.getStatus().getMp().getMp()%>
 	;
 	let playerMaxMp =
-${player.status.maxmp.maxmp}
+<%=player.getStatus().getMaxMp().getMp()%>
 	;
 	let playerAtk =
-${player.status.atk.atk}
+<%=player.getStatus().getAtk().getAtk()%>
 	;
 	let playerDef =
-${player.status.def.def}
+<%=player.getStatus().getDef().getDef()%>
 	;
 	const playerRecoveryName =
-${player.status.recovery.recoveryName}
+<%=player.getStatus().getRecovery().getName()%>
 	;
 	const playerRecovery =
-&{player.status.recovery.recovery}
+<%=player.getStatus().getRecovery().getRecovery()%>
 	;
 	const playerRecoveryCost =
-${player.status.recovery.recoveryCost}
+<%=player.getStatus().getRecovery().getRecoveryCost()%>
 	;
 	const enemyName =
-${enemy.name}
+<%=enemy.getName()%>
 	;
 	let enemyHp =
-${enemy.status.hp.hp}
+<%=enemy.getStatus().getHp().getHp()%>
 	;
 	let enemyMaxHp =
-${enemy.status.maxhp.maxhp}
+<%=enemy.getStatus().getMaxHp().getHp()%>
 	;
 	let enemyMp =
-${enemy.status.mp.mp}
+<%=enemy.getStatus().getMp().getMp()%>
 	;
 	let enemyMaxMp =
-${enemy.status.maxmp.maxmp}
+<%=enemy.getStatus().getMaxMp().getMp()%>
 	;
 	let enemyAtk =
-${enemy.status.atk.atk}
+<%=enemy.getStatus().getAtk().getAtk()%>
 	;
 	let enemyDef =
-${enemy.status.def.def}
+<%=enemy.getStatus().getDef().getDef()%>
 	;
 	const enemyRecoveryName =
-${enemy.status.recovery.recoveryName}
+<%=enemy.getStatus().getRecovery().getName()%>
 	;
 	const enemyRecovery =
-${enemy.status.recovery.recovery}
+<%=enemy.getStatus().getRecovery().getRecovery()%>
 	;
 	const enemyRecoveryCost =
-${enemy.status.recovery.recoveryCost}
+<%=enemy.getStatus().getRecovery().getRecoveryCost()%>
 	;
 </script>
-<script src=javascript/recovery.js></script>
-<script src=javascript/status.js></script>
-<script src=javascript/player.js></script>
-<script src=javascript/enemy.js></script>
-<script src=javascript/main.js></script>
+
+<script src="JavaScript/recovery.js"></script>
+<script src="JavaScript/status.js"></script>
+<script src="JavaScript/player.js"></script>
+<script src="JavaScript/enemy.js"></script>
+<script src="JavaScript/Hp.js"></script>
+<script src="JavaScript/MaxHp.js"></script>
+<script src="JavaScript/Mp.js"></script>
+<script src="JavaScript/MaxMp.js"></script>
+<script src="JavaScript/AttackPower.js"></script>
+<script src="JavaScript/DeffencePower.js"></script>
+<script src="JavaScript/main.js"></script>
 <title>Main</title>
 </head>
-<body onload="init()">
+<body>
 	<div id="container">
 		<div id="contents">
 			<left> <img src="img/bg.jpg" width="100%">
 			<div>
-			${player.status.hp}
-				<p id="maintext"></p>
+				<p id="maintext">aaa</p>
 			</div>
 			</left>
 			<right> <right-upper>
 			<div>
 				<div id="status">
-					<p><%=player.getName()%></p>
+					<p>${player.name}</p>
 					<p>
 						HP:
-						<hp id="hpDisplay"></hp>
-						/MAXHP:
-						${player.status.maxhp.maxhp}</p>
+						<hpDisplay><%=player.getStatus().getHp().getHp()%></hpDisplay>
+						/MAXHP:<%=player.getStatus().getMaxHp().getHp()%></p>
 					<p>
 						MP:
-						<mp id="mpDisplay"></mp>
-						/MAXMP:
-						${player.status.maxmp.maxmp}</p>
+						<mpDisplay><%=player.getStatus().getMp().getMp()%></mpDisplay>
+						/MAXMP:<%=player.getStatus().getMaxMp().getMp()%></p>
 					<p>
-						攻撃力:
-						${player.status.atk.atk}
-						/守備力:
-						${player.status.def.def}
-					</p>
+						攻撃力:<%=player.getStatus().getAtk().getAtk()%>/守備力:<%=player.getStatus().getDef().getDef()%></p>
 					<p>状態:通常</p>
+					<br>
+					<p><%=enemy.getName()%></p>
+					<p>
+						HP:
+						<enemyDisplay><%=enemy.getStatus().getHp().getHp()%></enemyDisplay>
+					</p>
 				</div>
 			</div>
 			</right-upper> <right-lower>
 			<div>
-				<button id="atkexecute" onclick="addEventListener()">たたかう</button>
+				<button id="atkexecute" onclick="textchange()">たたかう</button>
 				<br>
-				<button id="recoveryexecute" onclick="addEventListener()">かいふく</button>
+				<button id="recoveryexecute" onclick="textchange">かいふく</button>
 			</div>
 			</right-lower> </right>
 		</div>
 	</div>
+<script>
+/* 		window.onload = function() {
+			document.getElementById("maintext").textContent = "text"
+		}; */
+	</script>
 
 </body>
 </html>

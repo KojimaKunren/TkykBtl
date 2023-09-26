@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Enemy;
-import model.Player;
+import model.User;
 
 @WebServlet("/Main")
 public class Main extends HttpServlet{
@@ -19,18 +18,18 @@ public class Main extends HttpServlet{
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
 		HttpSession session = request.getSession();
-		Player player = (Player)session.getAttribute("player");
-		Enemy enemy = (Enemy)session.getAttribute("enemy");
+		User loginUser= (User)session.getAttribute("loginUser");
 		
-		session.setAttribute("player", player);
-		session.setAttribute("enemy", enemy);
-		
+		if(loginUser == null) {
+			response.sendRedirect("login.jsp");
+		}else {
 		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/main.jsp");
 		rd.forward(request, response);
 		}
-
+	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
 		request.setCharacterEncoding("UTF-8");
-}
+		}
+	
 }

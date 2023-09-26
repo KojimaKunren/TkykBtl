@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,18 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.EnemydataDAO;
 import dao.SavedataDAO;
 import dao.UserdataDAO;
-import model.Enemy;
 import model.Player;
-import model.Status;
 import model.User;
 
 @WebServlet("/Login")
 @MultipartConfig
 public class Login extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+
 		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/login.jsp");
 		rd.forward(request, response);
 	}
@@ -38,36 +35,35 @@ public class Login extends HttpServlet{
 		//リクエストスコープ
 		request.setAttribute("name", name);
 		request.setAttribute("pass", pass);
-		
-		//レスポンス指示
-		int id= 0;
+		HttpSession session = request.getSession();
 		
 		//ユーザーの呼び出し
 		UserdataDAO userDao = new UserdataDAO();
-		List<User> userlist = userDao.findAll();
-		
-		for(User user : userlist){
-			if(user.getName().equals(name) && user.getPass().equals(pass)){
-				id = user.getId();
-			}
-		}
-		
-		User user = new User(id,name,pass);
+//		List<User> userlist = userDao.findAll();
+//		
+//		for(User u : userlist){
+//			if(u.getName().equals(name) && user.getPass().equals(pass)){
+//				int id = u.getId();
+//			}
+//		}
+				
+		User user = userDao.findOne(name);
+		int id = user.getId();
 		
 		SavedataDAO savedataDao = new SavedataDAO();
-		Status status = savedataDao.findOne(id);
-		Player player = new Player(id, name, status);
+		Player player = new Player();
+		player = savedataDao.findOne(id);
+//		Player player = new Player(id, name, status);
 		
 		//セッションスコープ
-		HttpSession session = request.getSession();
 		session.setAttribute("loginUser", user);
 		session.setAttribute("player", player);
-		
+
 		//敵の生成
-		Enemy enemy = new Enemy();
-		EnemydataDAO enemydataDao = new EnemydataDAO();
-		enemy = enemydataDao.findOne(1);
-		session.setAttribute("enemy", enemy);
+//		Enemy enemy = new Enemy();
+//		EnemydataDAO enemydataDao = new EnemydataDAO();
+//		enemy = enemydataDao.findOne("ENEMY1");
+//		session.setAttribute("enemy", enemy);
 		
 		//送信
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/loginResult.jsp");
